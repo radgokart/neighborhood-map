@@ -5,7 +5,6 @@ html, body {
     padding: 0;
 }
 #map {
-    border: 10px solid red;
     height: 100%;
     z-index: 0;
 }

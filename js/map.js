@@ -6,7 +6,8 @@ var map;
 function initMap() {
     map = new google.maps.Map(document.getElementById('map'), {
     center: {lat: 33.447641, lng: -112.073550},
-    zoom: 14
+    zoom: 14,
+    fullscreenControl: true
     });
     // All of this must be called withing initMap, because it waits for the api to be loaded before executing its code. Otherwise, the browser would move on to map.js's map functions before the map/api was ready.
     var locations = [
