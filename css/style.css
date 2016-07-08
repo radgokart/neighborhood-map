@@ -1,3 +1,4 @@
+/* CSS sidebar inspiration came from https://github.com/BlackrockDigital/startbootstrap-simple-sidebar */
 html, body {
     height: 100%;
     width: 100%;
@@ -44,4 +45,28 @@ menu {
 }
 #filter-btn {
     float: right;
+}
+.sidebar-nav {
+    position: absolute;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.sidebar-nav li {
+    text-indent: 20px;
+    line-height: 40px;
+    color: white
+}
+
+.sidebar-nav li :hover {
+    text-decoration: none;
+    color: black;
+    background: rgba(255,255,255,0.2);
+}
+
+.sidebar-nav li a:active,
+.sidebar-nav li a:focus {
+    text-decoration: none;
 }

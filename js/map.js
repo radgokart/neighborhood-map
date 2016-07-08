@@ -1,6 +1,7 @@
 /* Inspiration drawn from Project_Code_6_StaticMapsAndStreetViewImagery.html of Google Maps API course */
 var markers = [];
 var map;
+var locations;
 
 // Callback function that run once maps API is loaded
 function initMap() {
@@ -10,7 +11,7 @@ function initMap() {
     fullscreenControl: true
     });
     // All of this must be called withing initMap, because it waits for the api to be loaded before executing its code. Otherwise, the browser would move on to map.js's map functions before the map/api was ready.
-    var locations = [
+    locations = [
         {title: 'Lux Central', location: {lat: 33.5006054, lng: -112.0742918}},
         {title: 'Chase Field', location: {lat: 33.4455264, lng: -112.0666641}},
         {title: 'Tres Leches Cafe', location: {lat: 33.51838850000001, lng: -112.063614}},
@@ -19,9 +20,6 @@ function initMap() {
     ];
 
     var myInfoWindow = new google.maps.InfoWindow();
-    // TODO come back to icons
-    //var defaultIcon = makeMarkerIcon('0091ff');
-    //var highlightedIcon = makeMarkerIcon('FFFF24');
 
     // This creates a marker for each item in locations array and then pushes it into markers array
 
@@ -34,7 +32,6 @@ function initMap() {
             position: position,
             title: title,
             animation: google.maps.Animation.DROP,
-            //icon: defaultIcon,
             id: i
         });
         markers.push(marker);
@@ -42,15 +39,9 @@ function initMap() {
         // TODO Waiting to get things working before moving on
         // This creates a click listener to that will open the info window
         //marker.click(function() {
-        //    giveInfoWindowSomeStuff(this, myInfoWindow);
+        //    giveInfoWindowSomeInfo(this, myInfoWindow);
         //});
-        // These listeners will change the color of the marker when moused on and off
-        //marker.mouseover(function() {
-        //    this.setIcon(highlightedIcon);
-        //});
-        //marker.mouseout(function() {
-        //    this.setIcon(defaultIcon);
-        //});
+
     }
     // Put each marker on the map and then extend the bounds of the map to include all markers
     var bounds = new google.maps.LatLngBounds();
@@ -59,4 +50,20 @@ function initMap() {
         bounds.extend(markers[j].position);
     }
     map.fitBounds(bounds);
+
+    // Wait until the map is loaded before loading knockout functionality
+    google.maps.event.addListenerOnce(map, 'tilesloaded', function(){
+        initKO();
+    });
+    google.maps.event.addListenerOnce(map, 'tilesloaded', function(){
+        initYelp();
+    });
+}
+
+function giveInfoWindowSomeInfo() {
+
+}
+
+function selectMarker() {
+    
 }
