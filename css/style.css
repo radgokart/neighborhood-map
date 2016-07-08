@@ -1,10 +1,13 @@
 html, body {
     height: 100%;
+    width: 100%;
     margin: 0;
     padding: 0;
 }
 #map {
+    border: 10px solid red;
     height: 100%;
+    z-index: 0;
 }
 menu {
     margin: 0;
@@ -24,6 +27,7 @@ menu {
 .menu-hidden #slide-menu{
     transform: translate3d(-22em, 0, 0);
     transition: transform 0.2s;
+    z-index: 1;
 }
 #slide-menu {
     position: absolute;
@@ -34,6 +38,7 @@ menu {
     transform: translate3d(0, 0, 0);
     transition: transform 0.2s;
     background: black;
+    z-index: 1;
 }
 #filter-text-col {
     padding: 0 0 0 0;
