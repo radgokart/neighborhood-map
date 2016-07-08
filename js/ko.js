@@ -11,5 +11,11 @@ function initKO() {
 
     $("#ko-menu").attr("data-bind", "foreach: menuList");
     $(".ko-menu-item").attr("data-bind", "text: title, attr: {id: index}");
+
     ko.applyBindings(new ViewModel());
+
+    $(document).on("click", "#header-hamburger", function() {
+        $("#slide-menu-container").toggleClass("menu-hidden");
+    });
+
 }
