@@ -1,0 +1,35 @@
+menu {
+    margin: 0 0 0 0;
+    padding: 0 0 0 0;
+}
+#header {
+    background-color: black;
+    color: white;
+    padding: 15px 0 15px 0;
+}
+#header-title {
+    text-align: left;
+}
+#header-hamburger {
+    text-align: left;
+}
+.menu-hidden #slide-menu{
+    transform: translate3d(-22em, 0, 0);
+    transition: transform 0.2s;
+}
+#slide-menu {
+    position: absolute;
+    top: 3.5em;
+    padding: 1em;
+    height: 100%;
+    width: 20em;
+    transform: translate3d(0, 0, 0);
+    transition: transform 0.2s;
+    background: black;
+}
+#filter-text-col {
+    padding: 0 0 0 0;
+}
+#filter-btn {
+    float: right;
+}
