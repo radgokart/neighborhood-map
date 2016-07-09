@@ -5,17 +5,10 @@ html, body {
     margin: 0;
     padding: 0;
 }
-menu {
-    margin: 0;
-    padding: 0;
-}
-#map {
-    height: 100%;
-    z-index: 0;
-}
 #header {
     background-color: black;
     color: white;
+    height: 50px;
     padding: 15px 0 15px 0;
 }
 #header-title {
@@ -27,11 +20,6 @@ menu {
 #hamburger {
     padding: 15px;
 }
-.menu-hidden #slide-menu{
-    transform: translate3d(-22em, 0, 0);
-    transition: transform 0.2s;
-    z-index: 1;
-}
 #slide-menu {
     position: absolute;
     top: 3.5em;
@@ -41,6 +29,11 @@ menu {
     transform: translate3d(0, 0, 0);
     transition: transform 0.2s;
     background: black;
+    z-index: 1;
+}
+#slide-menu.menu-hidden {
+    transform: translate3d(-22em, 0, 0);
+    transition: transform 0.2s;
     z-index: 1;
 }
 #filter-text-col {
@@ -62,14 +55,8 @@ menu {
     line-height: 40px;
     color: white
 }
-
-.sidebar-nav li :hover {
-    text-decoration: none;
-    color: black;
-    background: rgba(255,255,255,0.2);
-}
-
-.sidebar-nav li a:active,
-.sidebar-nav li a:focus {
-    text-decoration: none;
+#map {
+    height: 100%;
+    z-index: 0;
+    border: 5px solid red;
 }
