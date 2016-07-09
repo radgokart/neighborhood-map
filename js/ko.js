@@ -14,7 +14,7 @@ function initKO() {
 
     ko.applyBindings(new ViewModel());
 
-    $(document).on("click", "#header-hamburger", function() {
+    $(document).on("click", "#hamburger", function() {
         $("#slide-menu").toggleClass("menu-hidden");
     });
 
