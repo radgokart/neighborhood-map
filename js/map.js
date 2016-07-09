@@ -20,6 +20,10 @@ function initMap() {
     google.maps.event.addListenerOnce(map, 'tilesloaded', function(){
         initKO();
     });
+    if (map === null) {
+        alert("Error loading map");
+    }
+
 }
 
 function createMarkers() {
@@ -34,7 +38,7 @@ function createMarkers() {
             animation: google.maps.Animation.DROP,
             id: i
         });
-        markers.push(marker);
+        // markers.push(marker);
         // This creates a click listener to that will open the info window
         function listenToMarker (index) {
             marker.addListener("click", function() {
@@ -42,6 +46,7 @@ function createMarkers() {
             });
         }
         listenToMarker(i);
+        markers.push(marker);
     }
     // Put each marker on the map and then extend the bounds of the map to include all markers
     var bounds = new google.maps.LatLngBounds();

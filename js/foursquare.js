@@ -30,6 +30,7 @@ function initFoursquare() {
             }
         });
     });
+    // Make header say "loading"
     setTimeout(function() {
         $("#loading-text").text("");
     },1000);

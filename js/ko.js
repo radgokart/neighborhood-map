@@ -19,5 +19,25 @@ function initKO() {
     $(document).on("click", "#hamburger", function() {
         $("#slide-menu").toggleClass("menu-hidden");
     });
-
+    // Couldn't get these to work in a loop
+    $(document).on("click", "#ko-menu-item-0", function() {
+        $("#slide-menu").toggleClass("menu-hidden");
+        google.maps.event.trigger(markers[0], 'click');
+    });
+    $(document).on("click", "#ko-menu-item-1", function() {
+        $("#slide-menu").toggleClass("menu-hidden");
+        google.maps.event.trigger(markers[1], 'click');
+    });
+    $(document).on("click", "#ko-menu-item-2", function() {
+        $("#slide-menu").toggleClass("menu-hidden");
+        google.maps.event.trigger(markers[2], 'click');
+    });
+    $(document).on("click", "#ko-menu-item-3", function() {
+        $("#slide-menu").toggleClass("menu-hidden");
+        google.maps.event.trigger(markers[3], 'click');
+    });
+    $(document).on("click", "#ko-menu-item-4", function() {
+        $("#slide-menu").toggleClass("menu-hidden");
+        google.maps.event.trigger(markers[4], 'click');
+    });
 }
