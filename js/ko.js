@@ -13,7 +13,7 @@ function initKO() {
     $(".ko-menu-item").attr("data-bind", "text: title, attr: {id: index}");
 
     ko.applyBindings(new ViewModel());
-
+    // Non-KO JS
     $(document).on("click", "#hamburger", function() {
         $("#slide-menu").toggleClass("menu-hidden");
     });

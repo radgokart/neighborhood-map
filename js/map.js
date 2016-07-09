@@ -15,8 +15,8 @@ function initMap() {
         {title: 'Lux Central', location: {lat: 33.5006054, lng: -112.0742918}},
         {title: 'Chase Field', location: {lat: 33.4455264, lng: -112.0666641}},
         {title: 'Tres Leches Cafe', location: {lat: 33.51838850000001, lng: -112.063614}},
-        {title: 'The Westin Phoenix Downtown', location: {lat: 33.451666, lng: -112.0730457}},
         {title: 'Crescent Ballroom', location: {lat: 33.45179939999999, lng: -112.076835}},
+        {title: 'The Westin Phoenix Downtown', location: {lat: 33.451666, lng: -112.0730457}}
     ];
 
     var myInfoWindow = new google.maps.InfoWindow();
