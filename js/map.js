@@ -2,6 +2,8 @@
 var markers = [];
 var map;
 var locations;
+var foursquareData;
+var myInfoWindow;
 
 // Callback function that run once maps API is loaded
 function initMap() {
@@ -10,16 +12,19 @@ function initMap() {
     zoom: 12,
     scrollwheel: false
     });
-    // All of this must be called withing initMap, because it waits for the api to be loaded before executing its code. Otherwise, the browser would move on to map.js's map functions before the map/api was ready.
-    locations = [
-        {title: 'Lux Central', location: {lat: 33.5006054, lng: -112.0742918}},
-        {title: 'Chase Field', location: {lat: 33.4455264, lng: -112.0666641}},
-        {title: 'Tres Leches Cafe', location: {lat: 33.51838850000001, lng: -112.063614}},
-        {title: 'Crescent Ballroom', location: {lat: 33.45179939999999, lng: -112.076835}},
-        {title: 'The Westin Phoenix Downtown', location: {lat: 33.451666, lng: -112.0730457}}
-    ];
 
-    var myInfoWindow = new google.maps.InfoWindow();
+    // All of this must be called within initMap, because it waits for the api to be loaded before executing its code. Otherwise, the browser would move on to map.js's map functions before the map/api was ready.
+    locations = [
+        {title: 'Tres Leches Cafe', location: {lat: 33.51838850000001, lng: -112.063614}},
+        {title: 'The Westin Phoenix Downtown', location: {lat: 33.451666, lng: -112.0730457}},
+        {title: 'Chase Field', location: {lat: 33.4455264, lng: -112.0666641}},
+        {title: 'Lux Central', location: {lat: 33.5006054, lng: -112.0742918}},
+        {title: 'Crescent Ballroom', location: {lat: 33.45179939999999, lng: -112.076835}}
+    ];
+    // Need to initFoursquare here so that it has access to the locations array. This function lives in foursquare.js
+    initFoursquare();
+    foursquareData = foursquareInfoArray;
+    myInfoWindow = new google.maps.InfoWindow();
 
     // This creates a marker for each item in locations array and then pushes it into markers array
 
@@ -35,13 +40,13 @@ function initMap() {
             id: i
         });
         markers.push(marker);
-
-        // TODO Waiting to get things working before moving on
         // This creates a click listener to that will open the info window
-        //marker.click(function() {
-        //    giveInfoWindowSomeInfo(this, myInfoWindow);
-        //});
-
+        function listenToMarker(index) {
+            marker.addListener("click", function() {
+                giveInfoWindowSomeInfo(this, myInfoWindow, foursquareData[index]);
+            });
+        }
+        listenToMarker(i);
     }
     // Put each marker on the map and then extend the bounds of the map to include all markers
     var bounds = new google.maps.LatLngBounds();
@@ -55,15 +60,23 @@ function initMap() {
     google.maps.event.addListenerOnce(map, 'tilesloaded', function(){
         initKO();
     });
-    google.maps.event.addListenerOnce(map, 'tilesloaded', function(){
-        initYelp();
-    });
 }
 
-function giveInfoWindowSomeInfo() {
+function mapStuffAfterFoursquare() {
 
 }
 
-function selectMarker() {
-
+function giveInfoWindowSomeInfo(marker, infowindow, dataObject) {
+    if (infowindow.marker != marker) {
+    	// Clear infowindow content.
+    	infowindow.setContent('');
+    	infowindow.marker = marker;
+    	// Make sure the marker is cleared when the infowindow is closed.
+    	infowindow.addListener('closeclick', function() {
+    		infowindow.marker = null;
+    	});
+    	infowindow.setContent("<div>" + dataObject.title + "</div>" +
+                    "<div>" + dataObject.location + "</div>");
+    	infowindow.open(map, marker);
+    }
 }
