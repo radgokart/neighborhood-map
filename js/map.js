@@ -13,25 +13,20 @@ function initMap() {
     scrollwheel: false
     });
 
-    // All of this must be called within initMap, because it waits for the api to be loaded before executing its code. Otherwise, the browser would move on to map.js's map functions before the map/api was ready.
-    locations = [
-        {title: 'Tres Leches Cafe', location: {lat: 33.51838850000001, lng: -112.063614}},
-        {title: 'The Westin Phoenix Downtown', location: {lat: 33.451666, lng: -112.0730457}},
-        {title: 'Chase Field', location: {lat: 33.4455264, lng: -112.0666641}},
-        {title: 'Lux Central', location: {lat: 33.5006054, lng: -112.0742918}},
-        {title: 'Crescent Ballroom', location: {lat: 33.45179939999999, lng: -112.076835}}
-    ];
-    // Need to initFoursquare here so that it has access to the locations array. This function lives in foursquare.js
-    initFoursquare();
-    foursquareData = foursquareInfoArray;
+    foursquareData = foursquareLocationArray;
     myInfoWindow = new google.maps.InfoWindow();
 
-    // This creates a marker for each item in locations array and then pushes it into markers array
+    // Wait until the map is loaded before loading knockout functionality
+    google.maps.event.addListenerOnce(map, 'tilesloaded', function(){
+        initKO();
+    });
+}
 
-    for (var i=0; i < locations.length; i++) {
+function createMarkers() {
+    for (var i=0; i < foursquareData.length; i++) {
         // Get properties from current location element
-        var title = locations[i].title;
-        var position = locations[i].location;
+        var title = foursquareData[i].title;
+        var position = foursquareData[i].location;
         // Create marker for this location element and set its properties
         var marker = new google.maps.Marker({
             position: position,
@@ -41,7 +36,7 @@ function initMap() {
         });
         markers.push(marker);
         // This creates a click listener to that will open the info window
-        function listenToMarker(index) {
+        function listenToMarker (index) {
             marker.addListener("click", function() {
                 giveInfoWindowSomeInfo(this, myInfoWindow, foursquareData[index]);
             });
@@ -55,15 +50,7 @@ function initMap() {
         bounds.extend(markers[j].position);
     }
     map.fitBounds(bounds);
-
-    // Wait until the map is loaded before loading knockout functionality
-    google.maps.event.addListenerOnce(map, 'tilesloaded', function(){
-        initKO();
-    });
-}
-
-function mapStuffAfterFoursquare() {
-
+    console.log(markers);
 }
 
 function giveInfoWindowSomeInfo(marker, infowindow, dataObject) {
@@ -76,7 +63,7 @@ function giveInfoWindowSomeInfo(marker, infowindow, dataObject) {
     		infowindow.marker = null;
     	});
     	infowindow.setContent("<div>" + dataObject.title + "</div>" +
-                    "<div>" + dataObject.location + "</div>");
+                    "<div>lat: " + dataObject.location.lat + ", lng: " + dataObject.location.lng + "</div>");
     	infowindow.open(map, marker);
     }
 }

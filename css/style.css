@@ -20,6 +20,9 @@ html, body {
 #hamburger {
     padding: 15px;
 }
+#header-loading {
+    text-align: right;
+}
 #slide-menu {
     position: absolute;
     top: 3.5em;

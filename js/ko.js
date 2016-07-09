@@ -1,12 +1,12 @@
 function initKO() {
     // Create local copy of locations array from Google Maps
-    var googleMapsLocationData = locations;
+    var koLocationArray = foursquareLocationArray;
 
     var ViewModel = function() {
         var self = this;
         // This imports the titles property of all maps location array objects into a new array
         this.menuList = ko.observableArray([]);
-        googleMapsLocationData.forEach(function(locationItem, index) {
+        koLocationArray.forEach(function(locationItem, index) {
             self.menuList.push({"title": locationItem.title, "index": "ko-menu-item-"+index});
         });
     };
