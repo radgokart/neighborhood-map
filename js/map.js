@@ -50,7 +50,6 @@ function createMarkers() {
         bounds.extend(markers[j].position);
     }
     map.fitBounds(bounds);
-    console.log(markers);
 }
 
 function giveInfoWindowSomeInfo(marker, infowindow, dataObject) {
@@ -60,10 +59,17 @@ function giveInfoWindowSomeInfo(marker, infowindow, dataObject) {
     	infowindow.marker = marker;
     	// Make sure the marker is cleared when the infowindow is closed.
     	infowindow.addListener('closeclick', function() {
-    		infowindow.marker = null;
+            infowindow.marker.setAnimation(null);
+            infowindow.marker = null;
     	});
     	infowindow.setContent("<div>" + dataObject.title + "</div>" +
                     "<div>lat: " + dataObject.location.lat + ", lng: " + dataObject.location.lng + "</div>");
+        if (infowindow.marker.getAnimation() !== null) {
+            infowindow.marker.setAnimation(null);
+        }
+        else {
+            infowindow.marker.setAnimation(google.maps.Animation.DROP);
+        }
     	infowindow.open(map, marker);
     }
 }
