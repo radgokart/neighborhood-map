@@ -28,14 +28,14 @@ html, body {
     top: 3.5em;
     padding: 1em;
     height: 100%;
-    width: 20em;
+    width: 22em;
     transform: translate3d(0, 0, 0);
     transition: transform 0.2s;
     background: black;
     z-index: 1;
 }
 #slide-menu.menu-hidden {
-    transform: translate3d(-22em, 0, 0);
+    transform: translate3d(-24em, 0, 0);
     transition: transform 0.2s;
     z-index: 1;
 }
