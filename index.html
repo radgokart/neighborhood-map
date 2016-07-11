@@ -11,16 +11,13 @@
     <body>
         <div id="header-container" class="container-fluid">
             <div id="header" class="row">
-                <div id="header-title" class="col-xs-5 col-sm-4 col-md-4 col-lg-4">
+                <div id="header-title" class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
                     <span>Cool Places in PHX</span>
+                    <span id="hamburger-phx" class="hamburger">☰</span>
                 </div>
-                <div id="header-hamburger" class="col-xs-2 col-sm-4 col-md-4 col-lg-4">
-                    <span id="hamburger" class="hamburger">☰</span>
-                </div>
-                <!-- change id -->
-                <div id="header-api" class="col-xs-5 col-sm-4 col-md-4 col-lg-4">
-                    <!-- change id -->
-                    <span id="api-button"></span>
+                <div id="header-wiki" class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                    <span id="wiki-text">Wikipedia articles</span>
+                    <span id="hamburger-wiki" class="hamburger">☰</span>
                 </div>
             </div>
         </div>
@@ -46,7 +43,9 @@
                 </ul>
             </div>
         </div>
-
+        <div id="wiki-popout" class="wiki-hidden">
+            <!-- placeholder -->
+        </div>
         <div id="map">
             <!-- map goes here -->
         </div>

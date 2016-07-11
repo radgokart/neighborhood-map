@@ -1,10 +1,7 @@
-    /* Inspiration drawn from Project_Code_6_StaticMapsAndStreetViewImagery.html of Google Maps API course */
-    /*var markers = [];
-    var map;
-    var locations;
-    var myInfoWindow;*/
+// Begin map stuff
+/* Inspiration drawn from Project_Code_6_StaticMapsAndStreetViewImagery.html of Google Maps API course */
 
-    // Callback function that run once maps API is loaded
+// Callback function that run once maps API is loaded
 function initMap() {
     model.map = new google.maps.Map(document.getElementById('map'), {
     center: {lat: 33.447641, lng: -112.073550},
@@ -25,6 +22,13 @@ function initMap() {
     }
 }
 
+// This creates a click listener to that will open the info window
+function wireUpInfoWindow (index, marker) {
+    marker.addListener("click", function() {
+        giveInfoWindowSomeInfo(this, model.myInfoWindow, model.locations[index]);
+    });
+}
+
 function createMarkers() {
     for (var i=0; i < model.locations.length; i++) {
         // Get properties from current location element
@@ -38,26 +42,23 @@ function createMarkers() {
             id: i
         });
 
-            // This creates a click listener to that will open the info window
-        function wireUpInfoWindow (index) {
-            marker.addListener("click", function() {
-                giveInfoWindowSomeInfo(this, model.myInfoWindow, model.locations[index]);
-            });
-        }
-        wireUpInfoWindow(i);
+        wireUpInfoWindow(i, marker);
 
         model.markers.push(marker);
     }
         // Put each marker on the map and then extend the bounds of the map to include all markers
-    var bounds = new google.maps.LatLngBounds();
+    model.bounds = new google.maps.LatLngBounds();
     for (var j = 0; j<model.markers.length; j++) {
         model.markers[j].setMap(model.map);
-        bounds.extend(model.markers[j].position);
+        model.bounds.extend(model.markers[j].position);
     }
-    model.map.fitBounds(bounds);
+    model.map.fitBounds(model.bounds);
 }
 
 function giveInfoWindowSomeInfo(marker, infowindow, dataObject) {
+    function stopBouncing() {
+        infowindow.marker.setAnimation(null);
+    }
     if (infowindow.marker != marker) {
     	// Clear infowindow content.
     	infowindow.setContent('');
@@ -73,12 +74,37 @@ function giveInfoWindowSomeInfo(marker, infowindow, dataObject) {
             infowindow.marker.setAnimation(null);
         }
         else {
-            infowindow.marker.setAnimation(google.maps.Animation.DROP);
+            infowindow.marker.setAnimation(google.maps.Animation.BOUNCE);
+            setTimeout(stopBouncing, 2500);
         }
         infowindow.open(model.map, marker);
     }
 }
+// End map stuff
 
+// Begin wiki api stuff
+var wikiRequestTimeout = setTimeout(function() {
+    $("#wiki-popout").append("<p style='color: white;'>Failed to get wikipedia resources</p> <p>Please reload page</p>");
+}, 4000);
+
+
+$.ajax( {
+    url: "http://en.wikipedia.org/w/api.php?action=opensearch&search=Phoenix, AZ&callback=wikiCallBack",
+    dataType: 'jsonp',
+    success: function(response) {
+        var articleList = response[1];
+        for (var i = 0; i<articleList.length; i++) {
+            articleStr = articleList[i];
+            var url = "http://en.wikipedia.org/wiki/"+articleStr;
+            $("#wiki-popout").append("<li><a href='"+url+"'>"+articleStr+"</a></li>");
+        }
+        $("#wiki-popout").append("<li><a style='color: white;' href='https://www.wikipedia.org'>Courtesy of Wikipedia API</a></li>");
+    clearTimeout(wikiRequestTimeout);
+    }
+});
+// End wiki api stuff
+
+// Begin knockout stuff
 var model = {
     markers: [],
     map: null,
@@ -89,14 +115,19 @@ var model = {
         {title: 'Crescent Ballroom', location: {lat: 33.45179939999999, lng: -112.076835}},
         {title: 'The Westin Phoenix Downtown', location: {lat: 33.451666, lng: -112.0730457}}
     ],
-    myInfoWindow: null
+    myInfoWindow: null,
+    bounds: null,
+    wikiQuery: "Phoenix, AZ"
 };
 
 var ViewModel = function() {
     var self = this;
     // Maniputlating the DOM
-    $(document).on("click", "#hamburger", function() {
+    $(document).on("click", "#hamburger-phx", function() {
         $("#slide-menu").toggleClass("menu-hidden");
+    });
+    $(document).on("click", "#hamburger-wiki", function() {
+        $("#wiki-popout").toggleClass("wiki-hidden");
     });
     // Couldn't get these to work in a loop
     $(document).on("click", "#ko-menu-item-0", function() {
@@ -141,6 +172,13 @@ var ViewModel = function() {
                     passedItem.visibility(true);
                 } else {
                     passedItem.visibility(false);
+                    model.markers.forEach(function(markerItem) {
+                        if (passedItem.title == markerItem.title) {
+                            markerItem.setMap(null);
+                        }
+                    });
+                    // if map has been moved, fit bounds again to bring it where it should be based on filter
+                    model.map.fitBounds(model.bounds);
                 }
             }
         });
@@ -150,6 +188,14 @@ var ViewModel = function() {
         self.menuList().forEach(function(menuItem) {
             menuItem.visibility(true);
         });
+        // show all markers
+        model.markers.forEach(function(markerItem) {
+            markerItem.setMap(model.map);
+            model.bounds.extend(markerItem.position);
+        });
+        // show default bounds again
+        model.map.fitBounds(model.bounds);
     };
 };
 ko.applyBindings(new ViewModel());
+// End knockout stuff
