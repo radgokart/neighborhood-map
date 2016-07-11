@@ -94,79 +94,62 @@ var model = {
 
 var ViewModel = function() {
     var self = this;
-
+    // Maniputlating the DOM
+    $(document).on("click", "#hamburger", function() {
+        $("#slide-menu").toggleClass("menu-hidden");
+    });
+    // Couldn't get these to work in a loop
+    $(document).on("click", "#ko-menu-item-0", function() {
+        $("#slide-menu").toggleClass("menu-hidden");
+        google.maps.event.trigger(model.markers[0], 'click');
+    });
+    $(document).on("click", "#ko-menu-item-1", function() {
+        $("#slide-menu").toggleClass("menu-hidden");
+        google.maps.event.trigger(model.markers[1], 'click');
+    });
+    $(document).on("click", "#ko-menu-item-2", function() {
+        $("#slide-menu").toggleClass("menu-hidden");
+        google.maps.event.trigger(model.markers[2], 'click');
+    });
+    $(document).on("click", "#ko-menu-item-3", function() {
+        $("#slide-menu").toggleClass("menu-hidden");
+        google.maps.event.trigger(model.markers[3], 'click');
+    });
+    $(document).on("click", "#ko-menu-item-4", function() {
+        $("#slide-menu").toggleClass("menu-hidden");
+        google.maps.event.trigger(model.markers[4], 'click');
+    });
     $("#ko-menu").attr("data-bind", "foreach: menuList");
     $(".ko-menu-item").attr("data-bind", "text: title, attr: {id: index}, visible: visibility");
     $("#input-to-filter").attr("data-bind", "value: myInput");
     $("#filter-btn").attr("data-bind", "click: doFilter");
     $("#filter-btn-refresh").attr("data-bind", "click: resetFilter");
 
-    // This imports the titles property of all maps location array objects into a new array
     self.menuList = ko.observableArray([]);
     model.locations.forEach(function(locationItem, index) {
-        self.menuList.push({"title": locationItem.title, "index": "ko-menu-item-"+index, "visibility": true});
+        self.menuList.push({"title": locationItem.title, "index": "ko-menu-item-"+index, "visibility": ko.observable(true)});
     });
     self.myInput = ko.observable("Filter here...");
     self.doFilter = function() {
         self.checkFilter(self.menuList(), self.myInput().toLowerCase());
     };
     self.checkFilter = function(passedArray, searchTerm) {
-        // make existing stuff invisible and then good results visible later
-        self.menuList().forEach(function(item) {
-            item.visibility = false;
-        });
-        var tempArray = [];
-        var searchTermLength = searchTerm.length;
-        passedArray.forEach(function(item, index){
-            var cutString = item.title.slice(0, searchTermLength).toLowerCase();
-            if (cutString === searchTerm) {
-                tempArray.push(item);
-            } else {
-                // do nothing if it doesn't match
+        passedArray.forEach(function(passedItem, index){
+            // Only filter if item is already visible. Works for subsequent filtering.
+            if (passedItem.visibility() === true) {
+                if (passedItem.title.toLowerCase().search(searchTerm) != -1) {
+                    passedItem.visibility(true);
+                } else {
+                    passedItem.visibility(false);
+                }
             }
         });
-        // TODO get KO to observe changes to self.menuList
-        self.menuList().forEach(function(locationItem) {
-            tempArray.forEach(function(tempItem){
-                if (locationItem.title == tempItem.title) {
-                    locationItem.visibility = true;
-                }
-            });
-        });
-        console.log(self.menuList());
     };
     // reset menuList item visibility
     self.resetFilter = function() {
         self.menuList().forEach(function(menuItem) {
-            menuItem.visibility = true;
+            menuItem.visibility(true);
         });
-        console.log(self.menuList());
     };
 };
 ko.applyBindings(new ViewModel());
-
-    // Non-KO JS
-$(document).on("click", "#hamburger", function() {
-    $("#slide-menu").toggleClass("menu-hidden");
-});
-    // Couldn't get these to work in a loop
-$(document).on("click", "#ko-menu-item-0", function() {
-    $("#slide-menu").toggleClass("menu-hidden");
-    google.maps.event.trigger(model.markers[0], 'click');
-});
-$(document).on("click", "#ko-menu-item-1", function() {
-    $("#slide-menu").toggleClass("menu-hidden");
-    google.maps.event.trigger(model.markers[1], 'click');
-});
-$(document).on("click", "#ko-menu-item-2", function() {
-    $("#slide-menu").toggleClass("menu-hidden");
-    google.maps.event.trigger(model.markers[2], 'click');
-});
-$(document).on("click", "#ko-menu-item-3", function() {
-    $("#slide-menu").toggleClass("menu-hidden");
-    google.maps.event.trigger(model.markers[3], 'click');
-});
-$(document).on("click", "#ko-menu-item-4", function() {
-    $("#slide-menu").toggleClass("menu-hidden");
-    google.maps.event.trigger(model.markers[4], 'click');
-});
