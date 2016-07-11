@@ -6,8 +6,13 @@ function initMap() {
     model.map = new google.maps.Map(document.getElementById('map'), {
     center: {lat: 33.447641, lng: -112.073550},
     zoom: 12,
-    scrollwheel: false
-    });
+    scrollwheel: false,
+    streetViewControl: false,
+    zoomControl: true,
+    zoomControlOptions: {
+        position: google.maps.ControlPosition.LEFT_CENTER
+    }
+});
 
     model.myInfoWindow = new google.maps.InfoWindow();
 
@@ -86,7 +91,6 @@ function giveInfoWindowSomeInfo(marker, infowindow, dataObject) {
     	infowindow.marker = marker;
     	// Make sure the marker is cleared when the infowindow is closed.
     	infowindow.addListener('closeclick', function() {
-            infowindow.marker.setAnimation(null);
             infowindow.marker = null;
     	});
     	infowindow.setContent("<div>" + dataObject.title + "</div>" +

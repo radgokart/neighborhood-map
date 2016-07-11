@@ -11,6 +11,9 @@ html, body {
     height: 50px;
     padding: 15px 0 15px 0;
 }
+.form-group {
+    width: 22em;
+}
 #header-title {
     text-align: left;
 }
@@ -25,7 +28,7 @@ html, body {
 }
 #slide-menu {
     position: absolute;
-    top: 3.5em;
+    top: 50px;
     padding: 1em;
     height: 100%;
     width: 22em;
@@ -39,11 +42,14 @@ html, body {
     transition: transform 0.2s;
     z-index: 2;
 }
+.ko-menu-item {
+    font-size: 15px;
+}
 #filter-text-col {
     padding: 0 0 0 0;
 }
 #filter-btn {
-    float: right;
+
 }
 .sidebar-nav {
     position: absolute;
@@ -61,11 +67,10 @@ html, body {
 #map {
     height: 100%;
     z-index: 0;
-    border: 5px solid red;
 }
 #wiki-popout {
     position: absolute;
-    top: 3.5em;
+    top: 50px;
     padding: 1em;
     height: 100%;
     width: 70vw;
@@ -83,4 +88,187 @@ html, body {
     visibility: hidden;
     /*transition: transform 0.2s;*/
     z-index: 1;
+}
+/* Pulled boilerplate code from getbootstrao.com/css/ */
+
+/* Extra small devices (phones, less than 768px) */
+/* No media query since this is the default in Bootstrap */
+
+/* Small devices (tablets, 768px and up) */
+@media screen and (min-width: 768px) {
+    #header {
+        background-color: black;
+        color: white;
+        height: 70px;
+        padding: 15px 0 15px 0;
+    }
+    .form-group {
+        width: 26em;
+    }
+    #header-title {
+        text-align: left;
+        font-size: 22px;
+    }
+    #header-hamburger {
+        text-align: left;
+    }
+    .hamburger {
+        padding: 22px;
+    }
+    #header-wiki {
+        text-align: right;
+        font-size: 22px;
+    }
+    #slide-menu {
+        position: absolute;
+        top: 70px;
+        padding: 1em;
+        height: 100%;
+        width: 26em;
+        transform: translate3d(0, 0, 0);
+        transition: transform 0.2s;
+        background: black;
+        z-index: 2;
+    }
+    #slide-menu.menu-hidden {
+        transform: translate3d(-28em, 0, 0);
+        transition: transform 0.2s;
+        z-index: 2;
+    }
+    .ko-menu-item {
+        font-size: 20px;
+    }
+    #filter-text-col {
+        padding: 0 0 0 0;
+    }
+    .sidebar-nav {
+        position: absolute;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+
+    .sidebar-nav li {
+        text-indent: 20px;
+        line-height: 40px;
+        color: white;
+    }
+    #map {
+        height: 100%;
+        z-index: 0;
+    }
+    #wiki-popout {
+        position: absolute;
+        top: 70px;
+        padding: 1em;
+        height: 100%;
+        width: 45vw;
+        transform: translate3d(55vw, 0, 0);
+        transition: transform 0.2s;
+        background: black;
+        z-index: 1;
+        text-indent: 20px;
+        line-height: 40px;
+        list-style: none;
+        font-size: 18px;
+        color: white
+    }
+    #wiki-popout.wiki-hidden {
+        /*transform: translate3d(100vw, 0, 0);*/
+        visibility: hidden;
+        /*transition: transform 0.2s;*/
+        z-index: 1;
+    }
+}
+
+/* Medium devices (desktops, 992px and up) */
+@media (min-width: 992px) { /* happy using tablet settings for this size */ }
+
+/* Large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+    #header {
+        background-color: black;
+        color: white;
+        height: 74px;
+        padding: 15px 0 15px 0;
+    }
+    .form-group {
+        width: 32em;
+    }
+    #header-title {
+        text-align: left;
+        font-size: 28px;
+    }
+    #header-hamburger {
+        text-align: left;
+    }
+    .hamburger {
+        padding: 28px;
+    }
+    #header-wiki {
+        text-align: right;
+        font-size: 28px;
+    }
+    #slide-menu {
+        position: absolute;
+        top: 74px;
+        padding: 1em;
+        height: 100%;
+        width: 32em;
+        transform: translate3d(0, 0, 0);
+        transition: transform 0.2s;
+        background: black;
+        z-index: 2;
+    }
+    #slide-menu.menu-hidden {
+        transform: translate3d(-34em, 0, 0);
+        transition: transform 0.2s;
+        z-index: 2;
+    }
+    .ko-menu-item {
+        font-size: 26px;
+    }
+    #filter-text-col {
+        padding: 0 0 0 0;
+    }
+    .sidebar-nav {
+        position: absolute;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+
+    .sidebar-nav li {
+        text-indent: 20px;
+        line-height: 40px;
+        color: white;
+    }
+    #map {
+        height: 100%;
+        z-index: 0;
+    }
+    #wiki-popout {
+        position: absolute;
+        top: 74px;
+        padding: 1em;
+        height: 100%;
+        width: 30vw;
+        transform: translate3d(70vw, 0, 0);
+        transition: transform 0.2s;
+        background: black;
+        z-index: 1;
+        text-indent: 20px;
+        line-height: 40px;
+        list-style: none;
+        font-size: 24px;
+        color: white
+    }
+    #wiki-popout.wiki-hidden {
+        /*transform: translate3d(100vw, 0, 0);*/
+        visibility: hidden;
+        /*transition: transform 0.2s;*/
+        z-index: 1;
+    }
 }
