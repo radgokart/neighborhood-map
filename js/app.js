@@ -26,6 +26,27 @@ function initMap() {
 function wireUpInfoWindow (index, marker) {
     marker.addListener("click", function() {
         giveInfoWindowSomeInfo(this, model.myInfoWindow, model.locations[index]);
+        $("#wiki-popout").empty();
+        var wikiRequestTimeout = setTimeout(function() {
+            $("#wiki-popout").append("<p style='color: white;'>Failed to get wikipedia resources</p> <p>Please reload page</p>");
+        }, 4000);
+        $.ajax( {
+            url: "http://en.wikipedia.org/w/api.php?action=opensearch&search=" + marker.title + "&callback=wikiCallBack",
+            dataType: 'jsonp',
+            success: function(response) {
+                var articleList = response[1];
+                if (articleList.length < 1) {
+                    $("#wiki-popout").append("<li>No articles found</li>");
+                }
+                for (var i = 0; i < articleList.length; i++) {
+                    articleStr = articleList[i];
+                    var url = "http://en.wikipedia.org/wiki/"+articleStr;
+                    $("#wiki-popout").append("<li><a href='"+url+"'>"+articleStr+"</a></li>");
+                }
+                $("#wiki-popout").append("<li><a style='color: white;' href='https://www.wikipedia.org'>Courtesy of Wikipedia API</a></li>");
+            clearTimeout(wikiRequestTimeout);
+            }
+        });
     });
 }
 
@@ -75,18 +96,17 @@ function giveInfoWindowSomeInfo(marker, infowindow, dataObject) {
         }
         else {
             infowindow.marker.setAnimation(google.maps.Animation.BOUNCE);
-            setTimeout(stopBouncing, 2500);
+            setTimeout(stopBouncing, 400);
         }
         infowindow.open(model.map, marker);
     }
 }
 // End map stuff
 
-// Begin wiki api stuff
+// Begin initial wiki api stuff
 var wikiRequestTimeout = setTimeout(function() {
     $("#wiki-popout").append("<p style='color: white;'>Failed to get wikipedia resources</p> <p>Please reload page</p>");
 }, 4000);
-
 
 $.ajax( {
     url: "http://en.wikipedia.org/w/api.php?action=opensearch&search=Phoenix, AZ&callback=wikiCallBack",
