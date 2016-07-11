@@ -15,11 +15,6 @@ function initMap() {
 });
 
     model.myInfoWindow = new google.maps.InfoWindow();
-
-        // Wait until the map is loaded before loading knockout functionality
-        //google.maps.event.addListenerOnce(map, 'tilesloaded', function(){
-        //    initKO();
-        //});
     createMarkers();
 
     if (model.map === null) {
@@ -72,7 +67,7 @@ function createMarkers() {
 
         model.markers.push(marker);
     }
-        // Put each marker on the map and then extend the bounds of the map to include all markers
+    // Put each marker on the map and then extend the bounds of the map to include all markers
     model.bounds = new google.maps.LatLngBounds();
     for (var j = 0; j<model.markers.length; j++) {
         model.markers[j].setMap(model.map);
@@ -140,8 +135,7 @@ var model = {
         {title: 'The Westin Phoenix Downtown', location: {lat: 33.451666, lng: -112.0730457}}
     ],
     myInfoWindow: null,
-    bounds: null,
-    wikiQuery: "Phoenix, AZ"
+    bounds: null
 };
 
 var ViewModel = function() {
@@ -184,7 +178,7 @@ var ViewModel = function() {
     model.locations.forEach(function(locationItem, index) {
         self.menuList.push({"title": locationItem.title, "index": "ko-menu-item-"+index, "visibility": ko.observable(true)});
     });
-    self.myInput = ko.observable("Filter here...");
+    self.myInput = ko.observable("");
     self.doFilter = function() {
         self.checkFilter(self.menuList(), self.myInput().toLowerCase());
     };

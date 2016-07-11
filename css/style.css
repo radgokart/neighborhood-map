@@ -89,7 +89,7 @@ html, body {
     /*transition: transform 0.2s;*/
     z-index: 1;
 }
-/* Pulled boilerplate code from getbootstrao.com/css/ */
+/* Pulled boilerplate media query code from getbootstrao.com/css/ */
 
 /* Extra small devices (phones, less than 768px) */
 /* No media query since this is the default in Bootstrap */
