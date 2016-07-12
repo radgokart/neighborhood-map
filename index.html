@@ -55,6 +55,11 @@
         <script src="js/lib/jquery-3.0.0.min.js"></script>
         <script src="js/lib/knockout-3.4.0.js"></script>
         <script src="js/app.js"></script>
+        <script>
+            function mapError() {
+                alert("Error loading Google Maps");
+            }
+        </script>
         <script async defer
             src=
             "https://maps.googleapis.com/maps/api/js?key=AIzaSyAekM9XVEMmw0oWbPws8F5T-4WsCNB9Tw0&libraries=geometry&v=3&callback=initKO" onerror="mapError()">

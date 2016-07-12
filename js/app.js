@@ -1,7 +1,3 @@
-function mapError() {
-    alert("Error loading Google Maps");
-}
-
 function initKO() {
     var model = {
         markers: [],
