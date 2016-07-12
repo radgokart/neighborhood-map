@@ -1,31 +1,39 @@
 /* Inspiration for sidebar CSS came from https://github.com/BlackrockDigital/startbootstrap-simple-sidebar */
-html, body {
+html,
+body {
     height: 100%;
     width: 100%;
     margin: 0;
     padding: 0;
 }
+
 #header {
     background-color: black;
     color: white;
     height: 50px;
     padding: 15px 0 15px 0;
 }
+
 .form-group {
     width: 22em;
 }
+
 #header-title {
     text-align: left;
 }
+
 #header-hamburger {
     text-align: left;
 }
+
 .hamburger {
     padding: 15px;
 }
+
 #header-wiki {
     text-align: right;
 }
+
 #slide-menu {
     position: absolute;
     top: 50px;
@@ -37,20 +45,25 @@ html, body {
     background: black;
     z-index: 2;
 }
+
 #slide-menu.menu-hidden {
     transform: translate3d(-24em, 0, 0);
     transition: transform 0.2s;
     z-index: 2;
 }
+
 .ko-menu-item {
     font-size: 15px;
 }
+
 #filter-text-col {
     padding: 0 0 0 0;
 }
+
 #filter-btn {
 
 }
+
 .sidebar-nav {
     position: absolute;
     width: 100%;
@@ -58,24 +71,30 @@ html, body {
     padding: 0;
     list-style: none;
 }
+
 .wiki-list {
     padding-left: 3px;
 }
+
 .wiki-list-item:last-of-type a {
     color: white;
 }
+
 .wiki-list-item {
     list-style: none;
 }
+
 .sidebar-nav li {
     text-indent: 20px;
     line-height: 40px;
     color: white;
 }
+
 #map {
     height: 100%;
     z-index: 0;
 }
+
 #wiki-popout {
     position: absolute;
     top: 50px;
@@ -91,6 +110,7 @@ html, body {
     list-style: none;
     color: white
 }
+
 #wiki-popout.wiki-hidden {
     visibility: hidden;
     z-index: 1;
@@ -108,23 +128,29 @@ html, body {
         height: 70px;
         padding: 15px 0 15px 0;
     }
+
     .form-group {
         width: 26em;
     }
+
     #header-title {
         text-align: left;
         font-size: 22px;
     }
+
     #header-hamburger {
         text-align: left;
     }
+
     .hamburger {
         padding: 22px;
     }
+
     #header-wiki {
         text-align: right;
         font-size: 22px;
     }
+
     #slide-menu {
         position: absolute;
         top: 70px;
@@ -136,17 +162,21 @@ html, body {
         background: black;
         z-index: 2;
     }
+
     #slide-menu.menu-hidden {
         transform: translate3d(-28em, 0, 0);
         transition: transform 0.2s;
         z-index: 2;
     }
+
     .ko-menu-item {
         font-size: 20px;
     }
+
     #filter-text-col {
         padding: 0 0 0 0;
     }
+
     .sidebar-nav {
         position: absolute;
         width: 100%;
@@ -154,24 +184,30 @@ html, body {
         padding: 0;
         list-style: none;
     }
+
     .wiki-list {
         padding-left: 3px;
     }
+
     .wiki-list-item:last-of-type a {
         color: white;
     }
+
     .wiki-list-item {
         list-style: none;
     }
+
     .sidebar-nav li {
         text-indent: 20px;
         line-height: 40px;
         color: white;
     }
+
     #map {
         height: 100%;
         z-index: 0;
     }
+
     #wiki-popout {
         position: absolute;
         top: 70px;
@@ -188,6 +224,7 @@ html, body {
         font-size: 18px;
         color: white
     }
+
     #wiki-popout.wiki-hidden {
         visibility: hidden;
         z-index: 1;
@@ -205,23 +242,29 @@ html, body {
         height: 74px;
         padding: 15px 0 15px 0;
     }
+
     .form-group {
         width: 32em;
     }
+
     #header-title {
         text-align: left;
         font-size: 28px;
     }
+
     #header-hamburger {
         text-align: left;
     }
+
     .hamburger {
         padding: 28px;
     }
+
     #header-wiki {
         text-align: right;
         font-size: 28px;
     }
+
     #slide-menu {
         position: absolute;
         top: 74px;
@@ -233,17 +276,21 @@ html, body {
         background: black;
         z-index: 2;
     }
+
     #slide-menu.menu-hidden {
         transform: translate3d(-34em, 0, 0);
         transition: transform 0.2s;
         z-index: 2;
     }
+
     .ko-menu-item {
         font-size: 26px;
     }
+
     #filter-text-col {
         padding: 0 0 0 0;
     }
+
     .sidebar-nav {
         position: absolute;
         width: 100%;
@@ -251,24 +298,30 @@ html, body {
         padding: 0;
         list-style: none;
     }
+
     .wiki-list {
         padding-left: 3px;
     }
+
     .wiki-list-item:last-of-type a {
         color: white;
     }
+
     .wiki-list-item {
         list-style: none;
     }
+
     .sidebar-nav li {
         text-indent: 20px;
         line-height: 40px;
         color: white;
     }
+
     #map {
         height: 100%;
         z-index: 0;
     }
+
     #wiki-popout {
         position: absolute;
         top: 74px;
@@ -285,6 +338,7 @@ html, body {
         font-size: 24px;
         color: white
     }
+    
     #wiki-popout.wiki-hidden {
         visibility: hidden;
         z-index: 1;

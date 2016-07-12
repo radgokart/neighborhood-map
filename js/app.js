@@ -241,12 +241,10 @@ function initKO() {
         };
 
         self.giveInfoWindowSomeInfo = function(marker, infowindow, dataObject) {
-            function stopBouncing() {
+            var stopBouncing = function() {
                 infowindow.marker.setAnimation(null);
-            }
-            if (infowindow.marker != marker) {
-                // Clear infowindow content.
-                infowindow.setContent('');
+            };
+            if (infowindow.marker !== marker) {
                 infowindow.marker = marker;
                 // Make sure the marker is cleared when the infowindow is closed.
                 infowindow.addListener('closeclick', function() {
