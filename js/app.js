@@ -197,6 +197,7 @@ function initKO() {
                         title: "Failed to load Wikipedia",
                         url: "#"
                     });
+                    self.clickHamburgerWiki();
                 }, 4000);
                 $.ajax({
                     url: "http://en.wikipedia.org/w/api.php?action=opensearch&search=" + marker.title + "&callback=wikiCallBack",
