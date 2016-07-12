@@ -7,54 +7,58 @@
     <link href="css/bootstrap.css" rel="stylesheet"> <!-- glyphicon icons came with bootstrap-->
     <link href="css/style.css" rel="stylesheet">
     <script src="js/lib/jquery-3.0.0.min.js"></script>
+    <script src="js/lib/knockout-3.4.0.js"></script>
+    <script src="js/app.js"></script>
     </head>
     <body>
         <div id="header-container" class="container-fluid">
             <div id="header" class="row">
                 <div id="header-title" class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
                     <span>Cool Places in PHX</span>
-                    <span id="hamburger-phx" class="hamburger">☰</span>
+                    <span id="hamburger-phx" class="hamburger" data-bind="click: clickHamburgerPHX">☰</span>
                 </div>
                 <div id="header-wiki" class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
                     <span id="wiki-text">Wikipedia articles</span>
-                    <span id="hamburger-wiki" class="hamburger">☰</span>
+                    <span id="hamburger-wiki" class="hamburger" data-bind="click: clickHamburgerWiki">☰</span>
                 </div>
             </div>
         </div>
-        <div id="slide-menu" class="menu-hidden">
+        <div id="slide-menu" data-bind="visible: isSlideMenuVisible">
             <div class="form-group container">
                 <div class="row">
                     <div id="filter-text-col" class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
-                        <input id="input-to-filter" type="text" class="form-control" placeholder="Filter here..."></input>
+                        <input id="input-to-filter" type="text" class="form-control" placeholder="Filter here..." data-bind="value: myInput">
                     </div>
                     <div id="filter-btn-col" class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
-                        <button id="filter-btn" class="btn btn-default filter-button">
+                        <button id="filter-btn" class="btn btn-default filter-button" data-bind="click: doFilter">
                             <span class="glyphicon glyphicon-filter"></span>
                         </button>
-                        <button id="filter-btn-refresh" class="btn btn-default filter-button">
+                        <button id="filter-btn-refresh" class="btn btn-default filter-button" data-bind="click: resetFilter">
                             <span class="glyphicon glyphicon-refresh"></span>
                         </button>
                     </div>
                 </div>
             </div>
             <div id="sidebar-wrapper">
-                <ul id="ko-menu" class="sidebar-nav">
-                    <li class="ko-menu-item"></li>
+                <ul id="ko-menu" class="sidebar-nav" data-bind="foreach: menuList">
+                    <li class="ko-menu-item" data-bind="text: title, attr:{id: index}, visible: visibility, click: $parent.clickKoMenuItem"></li>
                 </ul>
             </div>
         </div>
-        <div id="wiki-popout" class="wiki-hidden">
-            <!-- placeholder -->
+        <div id="wiki-popout" data-bind="visible: isWikiMenuVisible">
+            <ul class="wiki-list" data-bind="foreach: wikiData">
+                <li class="wiki-list-item">
+                    <a data-bind="text: title, attr:{href: url}"></a>
+                </li>
+            </ul>
         </div>
         <div id="map">
             <!-- map goes here -->
         </div>
+
         <script async defer
             src=
-            "https://maps.googleapis.com/maps/api/js?key=AIzaSyAekM9XVEMmw0oWbPws8F5T-4WsCNB9Tw0&libraries=geometry&v=3&callback=initMap">
+            "https://maps.googleapis.com/maps/api/js?key=AIzaSyAekM9XVEMmw0oWbPws8F5T-4WsCNB9Tw0&libraries=geometry&v=3&callback=initKO" onerror="mapError()">
         </script>
-        <script src="js/lib/knockout-3.4.0.js"></script>
-        <script src="js/app.js"></script>
-
     </body>
 </html>
